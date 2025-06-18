@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            max-width: 100%;
+            background: linear-gradient(to bottom, hsl(240, 100%, 5%),hsl(240, 100%, 10%),hsl(240, 100%, 15%),hsl(240, 100%, 20%));
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            color: white;
+        }
+        #wrapper{
+            width: 100%;    
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 10vh 7vh 1fr;
+        }
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background-color: hsl(250, 14%, 20%);
+
+            border: 2px solid black;
+            border-radius: 15px;
+        }
+        #light_mode{
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            border-radius: 10px;
+            outline: 3px solid #db683e;
+            background-color: hsl(249, 3%, 42%);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+        }
+        nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: larger;
+        }
+        #category{
+            display: flex;
+            gap: 10px;
+        }
+        .nav_button{
+             border: none;
+             height: 40px;
+             padding: 20px;
+             border-radius: 20px;
+             background-color: #69686e;
+             outline: 2px solid hsl(240, 100%, 10%);
+             border: 2px solid #000033;
+             color: white;
+
+             display: flex;
+             align-items: center;
+             justify-content: center;
+
+             cursor: pointer;
+        }
+        main{
+            display: grid;
+            grid-template-columns: repeat(3, minmax(300px,1fr));
+            grid-auto-rows: 20vh;
+            gap: 10px;
+        }
+        .item{
+            border: 1px solid white;
+            border-radius: 15px;
+            padding: 12px;
+            background-color: hsl(250, 14%, 20%);
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3vh;
+        }
+        .img_name_container{
+
+            display: flex;
+            gap: 10px;
+        }
+        .use_status_container{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .remove_button{
+            padding: 7px;
+            border-radius: 20px;
+            background-color: inherit;
+            border: 1px solid white;
+            cursor: pointer
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 25px;
+          cursor: pointer;
+        }
+        
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          background-color: #ccc;
+          transition: 0.4s;
+          border-radius: 25px;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+        
+        .slider::before {
+          position: absolute;
+          content: "";
+          height: 19px;
+          width: 19px;
+          left: 3px;
+          bottom: 3px;
+          background-color: white;
+          transition: 0.4s;
+          border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+          background-color: rgb(219, 104, 62);
+        }
+        
+        input:checked + .slider::before {
+          transform: translateX(25px);
+        }
+
+        @media (max-width: 972px){
+            main{
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 550px){
+            #wrapper{
+                grid-template-rows: 5h 9vh 1fr;
+                gap: 5vh;
+            }
+            header{
+                width: 450px;
+            }
+            nav{
+                width: 450px;
+                flex-direction: column;
+                gap: 10px;
+            }
+            main{
+                width: 450px;
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="wrapper">
+        
+        <header>
+            <img src="assets/images/logo.svg" alt="">
+            <button id="light_mode"><img src="assets/images/icon-moon.svg" alt="" id="light_mode_img"></button>
+        </header>
+
+        <nav>
+            <h1>Extension List</h1>
+            <div id="category">
+                <button class="nav_button" onclick="showAll()">All</button>
+                <button class="nav_button" onclick="actives()">Active</button>
+                <button class="nav_button" onclick="inactives()">Inactive</button>
+            </div>
+        </nav>
+        <main>
+
+            <div class="item">  <!--Item 1 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-console-plus.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>DevLens</h2>
+                        <p>Quickly inspect page layouts and visualize element boundaries.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="DevLens">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 2 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-style-spy.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>StyleSpy</h2>
+                        <p>Instantly analyze and copy CSS from any webpage element.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="StyleSpy">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 3 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-speed-boost.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>SpeedBoost</h2>
+                        <p>Optimizes browser resource usage to accelerate page loading.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="SpeedBoost">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 4 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-json-wizard.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>JSONWizard</h2>
+                        <p>Formats, validates, and prettifies JSON responses in-browser.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="JSONWizard">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 5 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-tab-master-pro.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>TabMaster Pro</h2>
+                        <p>  Organizes browser tabs into groups and sessions.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="TabMaster">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 6 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-viewport-buddy.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>ViewportBuddy</h2>
+                        <p>Simulates various screen resolutions directly within the browser.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="ViewportBuddy">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 7 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-markup-notes.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>Markup Notes</h2>
+                        <p>Enables annotation and notes directly onto webpages for collaborative debugging.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="Markup Notes">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 8 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-grid-guides.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>GridGuides</h2>
+                        <p>Overlay customizable grids and alignment guides on any webpage.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="GridGuides">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 9 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-palette-picker.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>Palette Picker</h2>
+                        <p>Instantly extracts color palettes from any webpage.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="Palette Pickers">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 10 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-link-checker.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>LinkChecker</h2>
+                        <p>Scans and highlights broken links on any page.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="LinkChecker">
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item 11 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-dom-snapshot.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>DOM Snapshot</h2>
+                        <p>Scans and highlights broken links on any page.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button">Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="DOM Snapshot"->
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+            <div class="item">  <!--Item  12 start-->
+                <div class="img_name_container">
+                    <img src="assets/images/logo-console-plus.svg" alt="">
+                    <div class="name_descript_container">
+                        <h2>ConsolePlus</h2>
+                        <p>Enhanced developer console with advanced filtering and logging.</p>
+                    </div>
+                </div>
+                <div class="use_status_container">
+                    <button class="remove_button" >Remove</button>
+                    <label class="switch">
+                      <input type="checkbox" name="active[]" value="ConsolePlus" >
+                      <span class="slider"></span>
+                    </label>
+                </div>
+            </div>  <!--Item end-->
+
+        </main>
+    </div>
+
+
+    <script>
+        let container = document.getElementsByClassName("item"); // FOR NAVIGATOR
+        const header = document.querySelector("header");
+        const nav_button = document.querySelectorAll(".nav_button"); //FOR NAV BUTTON
+        let remove = document.getElementsByClassName("remove_button"); // FOR REMOVE BUTTON
+
+        //FOR LIGHT MODE
+        const light_mode = document.getElementById("light_mode");
+        const light_mode_img = document.getElementById("light_mode_img");
+        
+        light_mode.addEventListener("click", event => {
+            if(light_mode_img.src == "http://127.0.0.1:5500/browser-extensions-manager-ui-main/assets/images/icon-moon.svg"){
+                light_mode_img.src = "assets/images/icon-sun.svg";
+                document.body.style.background = "linear-gradient(to bottom, aliceblue)";
+                document.body.style.color = "black";
+
+                Array.from(container).forEach(element => {
+                    element.style.backgroundColor = "white";
+                })
+
+                nav_button.forEach(element => {
+                    element.style.backgroundColor = "white";
+                    element.style.color = "black";
+                })
+
+                Array.from(remove).forEach(element => {
+                    element.style.borderColor = "black";
+                    element.style.color = "black";
+                })
+                light_mode.style.backgroundColor = "lightgrey";
+                header.style.backgroundColor = "white";
+            }else{
+                light_mode_img.src = "assets/images/icon-moon.svg";
+                document.body.style.background = "linear-gradient(to bottom, hsl(240, 100%, 5%),hsl(240, 100%, 10%),hsl(240, 100%, 15%),hsl(240, 100%, 20%))";
+                document.body.style.color = "white";
+                light_mode.style.backgroundColor = "hsl(249, 3%, 42%)";
+                header.style.backgroundColor = "hsl(250, 14%, 20%)";
+
+                Array.from(container).forEach(element => {
+                    element.style.backgroundColor = "hsl(250, 14%, 20%)";
+                    element.style.border = "1px solid black";
+                })
+
+                Array.from(remove).forEach(element => {
+                    element.style.borderColor = "white";
+                    element.style.color = "white";
+                })
+
+            }
+        })
+
+        //FOR NAV BUTTON
+
+        nav_button.forEach((element, index) => {
+            element.addEventListener("click", (event) => {
+                element.style.backgroundColor = "#db683e";
+                element.style.outlineColor = "#db683e";
+
+                nav_button.forEach((element2, index2) => {
+                    if(index2 != index){
+                        element2.style.backgroundColor = "#000033";
+                        element2.style.outlineColor = "#000033";
+                    }
+                })
+            })
+        })
+
+        //FOR ACTIVE
+        let active = document.getElementsByName("active[]");
+        
+        function actives(){
+            active.forEach((element, index) => {
+                if(element.checked == true){
+                    container[index].style.display = "flex";
+                }
+                else{
+                    container[index].style.display = "none";
+                }
+            })
+        }
+
+        function inactives(){
+            active.forEach((element, index) => {
+                if(element.checked == false){
+                    container[index].style.display = "flex";
+                }else{
+                    container[index].style.display = "none";
+                }
+            })
+        }
+
+        function showAll(){
+            Array.from(container).forEach(element => {
+                element.style.display = "flex";
+            })
+        }
+
+        //Remove Button
+        
+        Array.from(remove).forEach((element) => {
+            element.addEventListener("click", event => {
+                element.parentElement.parentElement.remove();
+            })
+        })
+        
+        
+    </script>
+
+</body>
+</html>
